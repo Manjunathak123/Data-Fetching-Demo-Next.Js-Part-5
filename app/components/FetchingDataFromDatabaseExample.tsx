@@ -53,4 +53,5 @@ npm install @prisma/client
 -> create prisma-db.ts file for CRUD operations.
 -> create Product-db folder with page.tsx file
 -> since server components run on the server we can directly talk to database without need of an API.
+-> see product-db/page.tsx and prisma/schema.prisma files and prisma-db.ts files.
 */

@@ -9,8 +9,10 @@ import { getProducts } from "../prisma-db";
 import { Product } from "../products-db/page";
 import { ProductDetails } from "./product-details";
 
-export default async function ProductsDbUseOptimistic(){
-    const products: Product[] = await getProducts();
+
+export default async function ProductsDbUseOptimistic({searchParams}:{searchParams:Promise<{query?:string}>}){
+    const {query} = await searchParams;
+    const products: Product[] = await getProducts(query);
  /* useOptimistic function returns two things first is resulting optimistic state that is optimisticProduct and second is 
  the function to trigger the optimistic update. to make use of these values we will iterate over optimisticProducts and we will 
  create async function removeProductById that takes productId of type number and calling removeProduct function . 
@@ -19,7 +21,10 @@ export default async function ProductsDbUseOptimistic(){
  -> If we run this we will get error because we are using hook in server component so move data fetching logic to
  seperate component. create a new file product-details.tsx in product-db-useOptimistic folder.
 -> Now page.tsx is a sever component
+
+-> query?:string means query of type optinal and contains string
  */
+
 
 console.log('getProduct', products);
 return <ProductDetails products={products}/>;
